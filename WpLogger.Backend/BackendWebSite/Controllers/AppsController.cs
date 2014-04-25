@@ -1,20 +1,30 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
+using BackendWebSite.Models;
 
 namespace BackendWebSite.Controllers
 {
     public class AppsController : ApiController
     {
-        // GET: api/Apps
-        public IEnumerable<string> GetAll()
+        private static readonly IAppRepository repo = new AppRepository();
+
+        public async Task<IEnumerable<string>> GetByDeviceId([FromUri]string deviceId)
         {
-            return new string[] { "value1", "value2" };
+            return (await repo.GetApps(deviceId)).Select(dev => dev.Id);
         }
 
         // GET: api/Apps/5
-        public string GetByAppId([FromUri]string appId)
+        public async Task<App> GetByDeviceIdAndAppId([FromUri]string appId, [FromUri]string deviceId)
         {
-            return "value";
+            var result = await repo.GetApp(appId, deviceId);
+            if (result == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return result;
         }
     }
 }
