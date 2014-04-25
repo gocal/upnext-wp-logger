@@ -35,7 +35,7 @@ namespace BackendWebSite.Models
                 {
                     from = MinDate;
                 }
-                queryString = TableQuery.CombineFilters(queryString, "and", TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.GreaterThanOrEqual, from.Value));
+                queryString = TableQuery.CombineFilters(queryString, "and", TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.GreaterThan, from.Value));
             }
             if (to != null)
             {
