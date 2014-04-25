@@ -12,7 +12,7 @@ using System.Windows.Shapes;
 
 namespace WpLogger.Frontend
 {
-    public partial class App : Application
+ public partial class App : Application
     {
 
         private MainPage mainPage;

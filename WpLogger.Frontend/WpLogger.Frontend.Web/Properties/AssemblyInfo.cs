@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WpLogger.Frontend")]
+[assembly: AssemblyTitle("WpLogger.Frontend.Web")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WpLogger.Frontend")]
+[assembly: AssemblyProduct("WpLogger.Frontend.Web")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4e70d541-5749-4fba-aff8-0819f39bb518")]
+[assembly: Guid("08b307e8-2cf7-4540-90a3-9a894dc732f5")]
 
 // Version information for an assembly consists of the following four values:
 //

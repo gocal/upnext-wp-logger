@@ -29,7 +29,6 @@ namespace WpLogger.DataContract.Services
             _deviceId = "device_id_1";
 
             httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Accept", "application/xml");
         }
 
         #endregion
@@ -70,7 +69,7 @@ namespace WpLogger.DataContract.Services
         public async Task<List<LogEntry>> GetLogs(DateTime from, DateTime to)
         {
 
-            var url = new Uri(_apiUrl + _deviceId + "/" + _appId);
+            var url = new Uri(_apiUrl +"device/" + _deviceId + "/app/" + _appId+"/log");
      
             var response = await Get(url);
 
