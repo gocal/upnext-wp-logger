@@ -1,12 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Microsoft.WindowsAzure.Storage.Table;
 
 namespace BackendWebSite.Models
 {
-    public class Device
+    public class Device : TableEntity
     {
-        public string Id { get; set; }
+        private string _id;
+        
+        public Device()
+        {
+            this.PartitionKey = "Devices";
+        }
+
+        public string Id
+        {
+            get
+            {
+                return this.RowKey;
+                
+            }
+
+            set
+            {
+                this.RowKey = value;
+                
+            }
+        }
     }
 }

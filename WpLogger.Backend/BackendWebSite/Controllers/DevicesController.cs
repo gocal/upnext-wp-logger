@@ -1,29 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using BackendWebSite.Models;
-using WebGrease.Extensions;
 
 namespace BackendWebSite.Controllers
 {
     
     public class DevicesController : ApiController
     {
+        private static readonly IDevicesRepository repo = new DevicesRepository();
+
         // GET api/devices
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<string>> Get()
         {
-            var test = new StorageAccess();
-            return new string[] { "123" };
+            return (await repo.GetDevices()).Select(dev => dev.Id);
         }
 
-        /*// GET api/values
-        public IEnumerable<string> Get()
+        public async Task<Device> Get(string deviceId)
         {
-            return new string[] { "value1", "value2" };
-        }*/
+            if (deviceId.Length > 1000)
+            {
+                return null;
+            }
+            return await repo.GetDevice(deviceId);
+        }
 
         /*
         // GET api/values/5

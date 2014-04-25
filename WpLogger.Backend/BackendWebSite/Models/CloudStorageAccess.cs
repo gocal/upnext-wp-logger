@@ -4,11 +4,11 @@ using Microsoft.WindowsAzure.Storage.Table;
 
 namespace BackendWebSite.Models
 {
-    public class StorageAccess
+    public static class CloudStorageAccess
     {
         public const string ConnectionStringName = "LogsTableStorage";
 
-        public CloudTableClient GetTableClient()
+        public static CloudTableClient GetTableClient()
         {
             var connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
             var storageAccount = CloudStorageAccount.Parse(connectionString);
