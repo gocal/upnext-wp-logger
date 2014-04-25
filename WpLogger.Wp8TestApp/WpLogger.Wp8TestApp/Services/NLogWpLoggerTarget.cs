@@ -26,7 +26,7 @@ namespace WpLogger.Wp8TestApp.Services
 
         protected override void Write(LogEventInfo logEvent)
         {
-            wpLoggerService.SendLog(logEvent.LoggerName, logEvent.FormattedMessage);
+            wpLoggerService.SendLog(logEvent.Level.Name, logEvent.LoggerName, logEvent.FormattedMessage);
         }
 
         #endregion

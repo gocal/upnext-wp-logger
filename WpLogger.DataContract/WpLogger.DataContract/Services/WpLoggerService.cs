@@ -41,7 +41,7 @@ namespace WpLogger.DataContract.Services
             {
                 using (var request = new HttpRequestMessage(HttpMethod.Post, address))
                 {
-                    request.Content = new StringContent(data, Encoding.UTF8, "application/x-www-form-urlencoded");
+                    request.Content = new StringContent(data, Encoding.UTF8, "application/json");
                     return await httpClient.SendAsync(request);
                 }
             }
@@ -52,16 +52,17 @@ namespace WpLogger.DataContract.Services
             return await httpClient.GetAsync(address);
         }
 
-        public async void SendLog(string tag, string content)
+        public async void SendLog(string level, string tag, string content)
         {
             var logEntry = new LogEntry()
             {
+                LogLevel = level,
                 Content = content,
                 Tag = tag,
                 TimeStamp = DateTime.Now
             };
 
-            var url = new Uri(_apiUrl + _deviceId + "/" + _appId);
+            var url = new Uri(_apiUrl + "device/" + _deviceId + "/app/" + _appId + "/log");
             var data = JsonConvert.SerializeObject(logEntry);
             var response = await Post(url, data);
         }
