@@ -7,9 +7,17 @@ namespace BackendWebSite.Models
     [DataContract]
     public class LogEntry : TableEntity
     {
-        public string DeviceId { get; set; }
+        public string DeviceId
+        {
+            get { return this.PartitionKey; }
+            set { this.PartitionKey = value; }
+        }
 
-        public string AppId { get; set; }
+        public string AppId
+        {
+            get { return this.RowKey; }
+            set { this.RowKey = value; }
+        }
 
         [DataMember]
         public string LogLevel { get; set; }

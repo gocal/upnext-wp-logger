@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 
 namespace BackendWebSite
 {
@@ -32,10 +33,16 @@ namespace BackendWebSite
                 defaults: new { controller = "apps" }
             );
 
-            config.Routes.MapHttpRoute(
+            /*config.Routes.MapHttpRoute(
                 name: "Log",
                 routeTemplate: "api/device/{deviceId}/app/{appId}/log",
                 defaults: new { controller = "logs" }
+            );*/
+
+            config.Routes.MapHttpRoute(
+                name: "LogWithDates",
+                routeTemplate: "api/device/{deviceId}/app/{appId}/log/{from}/{to}",
+                defaults: new { controller = "logs", from = DateTime.MinValue, to = DateTime.MaxValue }
             );
         }
     }
