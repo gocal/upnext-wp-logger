@@ -6,8 +6,6 @@ namespace BackendWebSite.Models
     [DataContract]
     public class Device : TableEntity
     {
-        private string _id;
-        
         public Device()
         {
             this.PartitionKey = "Devices";

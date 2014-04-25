@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using BackendWebSite.Models;
@@ -23,7 +24,12 @@ namespace BackendWebSite.Controllers
             {
                 return null;
             }
-            return await repo.GetDevice(deviceId);
+            var result = await repo.GetDevice(deviceId);
+            if (result == null)
+            {
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            }
+            return result;
         }
     }
 }

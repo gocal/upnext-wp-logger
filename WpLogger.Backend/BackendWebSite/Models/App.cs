@@ -6,13 +6,6 @@ namespace BackendWebSite.Models
     [DataContract]
     public class App : TableEntity
     {
-        private string _id;
-        
-        public App()
-        {
-            this.PartitionKey = "Apps";
-        }
-
         [DataMember]
         public string Id
         {
@@ -25,6 +18,22 @@ namespace BackendWebSite.Models
             set
             {
                 this.RowKey = value;
+            }
+        }
+
+        [DataMember]
+        public string DeviceId
+        {
+            get
+            {
+                return this.PartitionKey;
+                
+            }
+
+            set
+            {
+                this.PartitionKey = value;
+                
             }
         }
     }

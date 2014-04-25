@@ -124,8 +124,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\App.cs" />
+    <Compile Include="Models\AppRepository.cs" />
     <Compile Include="Models\Device.cs" />
     <Compile Include="Models\DevicesRepository.cs" />
+    <Compile Include="Models\IAppRepository.cs" />
     <Compile Include="Models\IDevicesRepository.cs" />
     <Compile Include="Models\ILogRepository.cs" />
     <Compile Include="Models\LogEntry.cs" />
