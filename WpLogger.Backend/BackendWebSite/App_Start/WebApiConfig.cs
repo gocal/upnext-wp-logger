@@ -36,7 +36,7 @@ namespace BackendWebSite
             config.Routes.MapHttpRoute(
                 name: "LogWithDates",
                 routeTemplate: "api/device/{deviceId}/app/{appId}/log/{from}/{to}",
-                defaults: new { controller = "logs", from = DateTime.MinValue, to = DateTime.MaxValue }
+                defaults: new { controller = "logs", from = DateTimeOffset.MinValue, to = DateTimeOffset.MaxValue }
             );
         }
     }
