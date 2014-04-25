@@ -1,0 +1,10 @@
+*.suo
+Bin
+TestResults
+packages
+obj
+*.user
+
+Build/
+*.coverage
+*.Cache
