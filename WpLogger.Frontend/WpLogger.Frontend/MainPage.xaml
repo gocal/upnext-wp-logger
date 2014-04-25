@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <TextBlock Text="WpLogger" FontSize="30" />
+            <TextBlock Text="WpLogger 2000" FontSize="30" />
         </StackPanel>
 
 

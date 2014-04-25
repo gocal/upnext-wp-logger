@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Interop;
 using System.Windows.Threading;
@@ -33,7 +34,7 @@ namespace WpLogger.Frontend.Services
             _loggerService = loggerService;
             _timer = new DispatcherTimer();
 
-            _lastDate = DateTime.Now.AddHours(-1);
+            _lastDate = DateTime.UtcNow.AddHours(-1);
 
             _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             _timer.Tick += TimerOnTick;
@@ -77,10 +78,8 @@ namespace WpLogger.Frontend.Services
 
         private async void TimerOnTick(object sender, EventArgs eventArgs)
         {
-            var toDate = DateTime.Now;
+            var toDate = DateTime.UtcNow;
             var newItems = await _loggerService.GetLogs(_lastDate, toDate);
-
-            LogEntries.Clear();
 
             if (newItems != null)
             {
@@ -95,9 +94,9 @@ namespace WpLogger.Frontend.Services
                 }   
             }
 
-  
 
-            _lastDate = toDate;
+
+            _lastDate = LogEntries.Last().TimeStamp;
         }
 
 

@@ -33,8 +33,8 @@ namespace WpLogger.DataContract.Services
 
         public void setApp(string appId, string deviceId)
         {
-            _appId = appId;
-            _deviceId = deviceId;
+           // _appId = appId;
+           // _deviceId = deviceId;
         }
 
         #endregion
@@ -73,11 +73,13 @@ namespace WpLogger.DataContract.Services
             var response = await Post(url, data);
         }
 
-        public async Task<List<LogEntry>> GetLogs(DateTimeOffset from, DateTimeOffset to)
+        public async Task<List<LogEntry>> GetLogs(DateTime from, DateTime to)
         {
 
-            var url = new Uri(_apiUrl +"device/" + _deviceId + "/app/" + _appId+"/log?from"+from+"&to"+to);
+            var url = new Uri(_apiUrl + "device/" + _deviceId + "/app/" + _appId + "/log?from=" + from.ToUniversalTime().ToString("O") + "&to=" + to.ToUniversalTime().ToString("O"));
      
+            
+
             var response = await Get(url);
 
             var reader = new StreamReader(await response.Content.ReadAsStreamAsync());
