@@ -6,7 +6,7 @@ namespace BackendWebSite.Controllers
     public class LogsController : ApiController
     {
         // GET: api/Logs
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetAll()
         {
             return new string[] { "log1", "log2" };
         }

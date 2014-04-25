@@ -12,12 +12,12 @@ namespace BackendWebSite.Controllers
         private static readonly IDevicesRepository repo = new DevicesRepository();
 
         // GET api/devices
-        public async Task<IEnumerable<string>> Get()
+        public async Task<IEnumerable<string>> GetAll()
         {
             return (await repo.GetDevices()).Select(dev => dev.Id);
         }
 
-        public async Task<Device> Get(string deviceId)
+        public async Task<Device> GetByDeviceId([FromUri]string deviceId)
         {
             if (deviceId.Length > 1000)
             {

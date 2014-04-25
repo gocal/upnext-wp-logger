@@ -6,13 +6,13 @@ namespace BackendWebSite.Controllers
     public class AppsController : ApiController
     {
         // GET: api/Apps
-        public IEnumerable<string> Get()
+        public IEnumerable<string> GetAll()
         {
             return new string[] { "value1", "value2" };
         }
 
         // GET: api/Apps/5
-        public string Get(string id)
+        public string GetByAppId([FromUri]string appId)
         {
             return "value";
         }
