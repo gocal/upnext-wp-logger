@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using SharpGIS.SyntaxHighlighting;
 using WpLogger.DataContract.Model;
 using WpLogger.Frontend.Services;
 
@@ -43,5 +44,16 @@ namespace WpLogger.Frontend
             _logEntriesProvider.Stop();
         }
 
+        private void DataGrid_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems != null && e.AddedItems.Count > 0)
+            {
+                var entry = e.AddedItems[0] as LogEntry;
+
+                CodeHighlighter.SourceCode = entry.Content;
+            }
+
+        
+        }
     }
 }

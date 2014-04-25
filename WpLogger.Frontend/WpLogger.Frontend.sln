@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpLogger.Frontend", "WpLogger.Frontend\WpLogger.Frontend.csproj", "{D33DE893-D34A-46C4-AD96-809FA2841BB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpLogger.Frontend", "WpLogger.Frontend\WpLogger.Frontend.csproj", "{4E70D541-5749-4FBA-AFF8-0819F39BB518}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpLogger.Frontend.Web", "WpLogger.Frontend.Web\WpLogger.Frontend.Web.csproj", "{672175BC-D6FF-4639-9EC5-0F446D5291BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpLogger.DataContract", "..\WpLogger.DataContract\WpLogger.DataContract\WpLogger.DataContract.csproj", "{FADF7589-30C5-43F5-89FE-8ADF7E395E25}"
 EndProject
@@ -15,10 +17,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D33DE893-D34A-46C4-AD96-809FA2841BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D33DE893-D34A-46C4-AD96-809FA2841BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D33DE893-D34A-46C4-AD96-809FA2841BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D33DE893-D34A-46C4-AD96-809FA2841BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E70D541-5749-4FBA-AFF8-0819F39BB518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E70D541-5749-4FBA-AFF8-0819F39BB518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E70D541-5749-4FBA-AFF8-0819F39BB518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E70D541-5749-4FBA-AFF8-0819F39BB518}.Release|Any CPU.Build.0 = Release|Any CPU
+		{672175BC-D6FF-4639-9EC5-0F446D5291BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{672175BC-D6FF-4639-9EC5-0F446D5291BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{672175BC-D6FF-4639-9EC5-0F446D5291BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{672175BC-D6FF-4639-9EC5-0F446D5291BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Release|Any CPU.ActiveCfg = Release|Any CPU

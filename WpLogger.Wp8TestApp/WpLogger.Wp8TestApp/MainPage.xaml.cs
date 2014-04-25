@@ -51,7 +51,7 @@ namespace WpLogger.Wp8TestApp
         //}
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
-            _logger.Debug("button clicked");
+            _logger.Debug(TextBox.Text);
         }
     }
 }

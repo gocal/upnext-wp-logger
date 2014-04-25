@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Windows.Interop;
 using System.Windows.Threading;
+using System.Xml.Serialization;
 using WpLogger.DataContract.Model;
 using WpLogger.DataContract.Services;
 
@@ -73,16 +78,37 @@ namespace WpLogger.Frontend.Services
         private async void TimerOnTick(object sender, EventArgs eventArgs)
         {
             var toDate = DateTime.Now;
-            //var newItems = await _loggerService.GetLogs(_lastDate, toDate);
+            var newItems = await _loggerService.GetLogs(_lastDate, toDate);
+
+            /*
+
+            var xmlSerializer = new XmlSerializer(typeof(TestObject));
+
+            var testEntry = new TestObject()
+            {
+                text = "Entry " + DateTime.Now.Ticks,
+                value = (int) (DateTime.Now.Ticks/2)
+            };
+
+            var content = "";
+
+            using (var stringWriter = new Utf8StringWriter(CultureInfo.InvariantCulture))
+            {
+                xmlSerializer.Serialize(stringWriter, testEntry);
+                content = stringWriter.ToString();
+            }
 
             var newItems = new List<LogEntry>();
+
             newItems.Add(new LogEntry()
             {
-                Content = "Test",
-                LogLevel = "Test",
+                Content = content,
+                LogLevel = "Debug",
                 Tag = "Tag",
                 TimeStamp = DateTime.Now
             });
+
+            */
 
             foreach (var item in newItems)
             {
@@ -95,6 +121,37 @@ namespace WpLogger.Frontend.Services
             }
 
             _lastDate = toDate;
+        }
+
+        public class TestObject
+        {
+            public int value;
+            public string text;
+        }
+
+
+        public class Utf8StringWriter : StringWriter
+        {
+            #region Constructors and Destructors
+
+            public Utf8StringWriter(IFormatProvider formatProvider)
+                : base(formatProvider)
+            {
+            }
+
+            #endregion
+
+            #region Public Properties
+
+            public override Encoding Encoding
+            {
+                get
+                {
+                    return Encoding.UTF8;
+                }
+            }
+
+            #endregion
         }
 
         #endregion
