@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using BackendWebSite.Models;
 
 namespace BackendWebSite.Controllers
 {
@@ -8,13 +9,13 @@ namespace BackendWebSite.Controllers
         // GET: api/Apps
         public IEnumerable<string> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "AppId", "AppId2" };
         }
 
         // GET: api/Apps/5
-        public string GetByAppId([FromUri]string appId)
+        public App GetByAppId([FromUri]string appId)
         {
-            return "value";
+            return new App {Id = "AppId"};
         }
     }
 }

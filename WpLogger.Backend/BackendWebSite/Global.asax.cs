@@ -8,7 +8,7 @@ namespace BackendWebSite
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configuration.Formatters.JsonFormatter.UseDataContractJsonSerializer = true;
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
             GlobalConfiguration.Configure(WebApiConfig.Register);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
