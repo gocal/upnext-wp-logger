@@ -14,7 +14,7 @@ namespace BackendWebSite.Controllers
 
         [HttpGet]
         [ActionName("LogWithDates")]
-        public async Task<IEnumerable<LogEntry>> GetAllByDeviceIdAndAppId([FromUri]string deviceId, [FromUri]string appId, [FromUri]DateTime? from, [FromUri]DateTime? to)
+        public async Task<IEnumerable<LogEntry>> GetAllByDeviceIdAndAppId([FromUri]string deviceId, [FromUri]string appId, [FromUri]DateTimeOffset? from, [FromUri]DateTimeOffset? to)
         {
             return await logRepository.GetLogEntries(deviceId, appId, from, to);
         }

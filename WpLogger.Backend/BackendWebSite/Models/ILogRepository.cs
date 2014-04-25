@@ -8,6 +8,6 @@ namespace BackendWebSite.Models
     {
         Task SaveLogEntry(LogEntry logEntry);
 
-        Task<IEnumerable<LogEntry>> GetLogEntries(string deviceId, string appId, DateTime? from, DateTime? to);
+        Task<IEnumerable<LogEntry>> GetLogEntries(string deviceId, string appId, DateTimeOffset? from, DateTimeOffset? to);
     }
 }

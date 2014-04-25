@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.Storage.Table;
@@ -19,22 +18,22 @@ namespace BackendWebSite.Models
             await tableReference.ExecuteAsync(insertOperation);
         }
 
-        public async Task<IEnumerable<LogEntry>> GetLogEntries(string deviceId, string appId, DateTime? @from, DateTime? to)
+        public async Task<IEnumerable<LogEntry>> GetLogEntries(string deviceId, string appId, DateTimeOffset? @from, DateTimeOffset? to)
         {
             var tableReference = this.GetTableReference();
             await tableReference.CreateIfNotExistsAsync();
 
-            var query = new TableQuery<LogEntry>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, appId))
-                .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, deviceId));
+            var query = new TableQuery<LogEntry>().Where(TableQuery.GenerateFilterCondition("AppId", QueryComparisons.Equal, appId))
+                .Where(TableQuery.GenerateFilterCondition("DeviceId", QueryComparisons.Equal, deviceId));
 
-            /*if (from != null)
+            if (from != null)
             {
-                query = query.Where(TableQuery.GenerateFilterCondition("TimeStamp", QueryComparisons.GreaterThanOrEqual, from.Value.ToString(CultureInfo.InvariantCulture)));
+                query = query.Where(TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.GreaterThanOrEqual, from.Value));
             }
             if (to != null)
             {
-                query = query.Where(TableQuery.GenerateFilterCondition("TimeStamp", QueryComparisons.LessThanOrEqual, to.Value.ToString(CultureInfo.InvariantCulture)));
-            }*/
+                query = query.Where(TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.LessThanOrEqual, to.Value));
+            }
 
             TableContinuationToken continuationToken = null;
             var cancellationToken = new CancellationToken();
