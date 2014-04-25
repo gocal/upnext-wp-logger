@@ -7,9 +7,28 @@ namespace BackendWebSite.Models
     [DataContract]
     public class LogEntry : TableEntity
     {
-        public string DeviceId { get; set; }
+        private string _deviceId;
+        public string DeviceId
+        {
+            get { return _deviceId; }
+            set
+            {
+                _deviceId = value;
+                UpdatePartitionKey();
+            }
+        }
 
-        public string AppId { get; set; }
+        private string _appId;
+
+        public string AppId
+        {
+            get { return _appId; }
+            set
+            {
+                _appId = value;
+                UpdatePartitionKey();
+            }
+        }
 
         [DataMember]
         public string LogLevel { get; set; }
@@ -20,7 +39,20 @@ namespace BackendWebSite.Models
         [DataMember]
         public string Content { get; set; }
 
+        private DateTime _timeStamp;
         [DataMember]
-        public DateTime TimeStamp { get; set; }
+        public DateTime TimeStamp {
+            get { return _timeStamp; }
+            set
+            {
+                _timeStamp = value;
+                this.RowKey = value.ToString("O");
+            } }
+
+
+        private void UpdatePartitionKey()
+        {
+            this.PartitionKey = (this.DeviceId ?? string.Empty) + "_____" + (this.AppId ?? string.Empty);
+        }
     }
 }

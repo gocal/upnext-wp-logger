@@ -5,14 +5,14 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendWebSite", "BackendWebSite\BackendWebSite.csproj", "{97E3F386-E460-47A7-B3E7-6B4AF295B3C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendWebSite.Tests", "BackendWebSite.Tests\BackendWebSite.Tests.csproj", "{30B68A56-DC52-4538-BB0F-1AFCABB90A0C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{964B9BC2-C102-4AE2-8CC9-37B8FD6B5274}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{EE504217-7CF6-4790-9BF8-17C25F1C1D42}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,10 +24,10 @@ Global
 		{97E3F386-E460-47A7-B3E7-6B4AF295B3C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97E3F386-E460-47A7-B3E7-6B4AF295B3C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97E3F386-E460-47A7-B3E7-6B4AF295B3C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{30B68A56-DC52-4538-BB0F-1AFCABB90A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{30B68A56-DC52-4538-BB0F-1AFCABB90A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{30B68A56-DC52-4538-BB0F-1AFCABB90A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{30B68A56-DC52-4538-BB0F-1AFCABB90A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE504217-7CF6-4790-9BF8-17C25F1C1D42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE504217-7CF6-4790-9BF8-17C25F1C1D42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE504217-7CF6-4790-9BF8-17C25F1C1D42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE504217-7CF6-4790-9BF8-17C25F1C1D42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

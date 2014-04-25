@@ -12,32 +12,26 @@ namespace BackendWebSite.Controllers
         IAppRepository appRepository = new AppRepository();
         ILogRepository logRepository = new LogRepository();
 
-        public async Task<IEnumerable<LogEntry>> GetAllByDeviceIdAndAppId([FromUri]string deviceId, [FromUri]string appId)
+        [HttpGet]
+        [ActionName("LogWithDates")]
+        public async Task<IEnumerable<LogEntry>> GetAllByDeviceIdAndAppId([FromUri]string deviceId, [FromUri]string appId, [FromUri]DateTimeOffset? from, [FromUri]DateTimeOffset? to)
         {
-            var results = new List<LogEntry>();
-            results.Add(new LogEntry
-            {
-                AppId = "123",
-                Content = "LogContent",
-                DeviceId = "DeviceId",
-                ETag = "ETag",
-                LogLevel = "LogLevel",
-                PartitionKey = "PartitionKey",
-                RowKey = "RowKey",
-                Tag = "Tag",
-                TimeStamp = DateTime.Now
-            });
-
-            return await Task.FromResult(results);
+            return await logRepository.GetLogEntries(deviceId, appId, from, to);
         }
 
-        public void Post([FromBody]LogEntry logEntry, [FromUri]string deviceId, [FromUri]string appId)
+        [HttpPost]
+        [ActionName("LogWithDates")]
+        public async Task Post([FromBody]LogEntry logEntry, [FromUri]string deviceId, [FromUri]string appId)
         {
             var device = new Device {Id = deviceId};
             var app = new App {DeviceId = deviceId, Id = appId};
 
-            devicesRepository.AddDevice(device);
+            await devicesRepository.AddDevice(device); // in case they're not there yet
+            await appRepository.AddApp(app);
 
+            logEntry.AppId = appId;
+            logEntry.DeviceId = deviceId;
+            await logRepository.SaveLogEntry(logEntry);
         }
     }
 }

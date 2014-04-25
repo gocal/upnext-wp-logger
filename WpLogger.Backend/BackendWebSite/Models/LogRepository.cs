@@ -1,22 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.WindowsAzure.Storage.Table;
 
 namespace BackendWebSite.Models
 {
     public class LogRepository : ILogRepository
     {
-        public Task SaveLogEntry(LogEntry logEntry)
+        public async Task SaveLogEntry(LogEntry logEntry)
         {
-            throw new NotImplementedException();
+            var tableReference = this.GetTableReference();
+            await tableReference.CreateIfNotExistsAsync();
+
+            TableOperation insertOperation = TableOperation.InsertOrReplace(logEntry);
+
+            await tableReference.ExecuteAsync(insertOperation);
         }
 
-        public IEnumerable<LogEntry> GetLogEntries(string deviceId, string appId, DateTime? @from)
+        public async Task<IEnumerable<LogEntry>> GetLogEntries(string deviceId, string appId, DateTimeOffset? from, DateTimeOffset? to)
         {
-            throw new NotImplementedException();
+            var tableReference = this.GetTableReference();
+            await tableReference.CreateIfNotExistsAsync();
+
+            var queryString = TableQuery.CombineFilters(TableQuery.GenerateFilterCondition("AppId", QueryComparisons.Equal, appId), "and",
+                TableQuery.GenerateFilterCondition("DeviceId", QueryComparisons.Equal, deviceId));
+
+            if (from != null)
+            {
+                queryString = TableQuery.CombineFilters(queryString, "and", TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.GreaterThanOrEqual, from.Value));
+            }
+            if (to != null)
+            {
+                queryString = TableQuery.CombineFilters(queryString, "and", TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.LessThanOrEqual, to.Value));
+            }
+
+            var query = new TableQuery<LogEntry>().Where(queryString);
+
+            TableContinuationToken continuationToken = null;
+            var cancellationToken = new CancellationToken();
+
+            return (await tableReference.ExecuteQuerySegmentedAsync(query, continuationToken, cancellationToken));
         }
 
         private CloudTable GetTableReference()
