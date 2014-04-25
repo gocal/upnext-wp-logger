@@ -4,17 +4,28 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BackendWebSite.Models;
+using WebGrease.Extensions;
 
 namespace BackendWebSite.Controllers
 {
-    public class ValuesController : ApiController
+    
+    public class DevicesController : ApiController
     {
-        // GET api/values
+        // GET api/devices
+        public IEnumerable<string> Get()
+        {
+            var test = new StorageAccess();
+            return new string[] { "123" };
+        }
+
+        /*// GET api/values
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
-        }
+        }*/
 
+        /*
         // GET api/values/5
         public string Get(int id)
         {
@@ -35,5 +46,6 @@ namespace BackendWebSite.Controllers
         public void Delete(int id)
         {
         }
+         * */
     }
 }
