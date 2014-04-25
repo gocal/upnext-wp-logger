@@ -7,31 +7,31 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using NLog;
+using WpLogger.DataContract.Model;
 using WpLogger.Wp8TestApp.Resources;
+using WpLogger.Wp8TestApp.Services;
 
 namespace WpLogger.Wp8TestApp
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private string tag = "MainPage";
+
+        private Logger _logger;
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
-            // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            this._logger = LogManager.GetLogger(tag);
         }
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+
         }
 
         // Sample code for building a localized ApplicationBar
@@ -49,5 +49,9 @@ namespace WpLogger.Wp8TestApp
         //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
         //    ApplicationBar.MenuItems.Add(appBarMenuItem);
         //}
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            _logger.Debug("button clicked");
+        }
     }
 }

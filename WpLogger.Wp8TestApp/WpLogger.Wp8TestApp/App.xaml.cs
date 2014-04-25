@@ -6,30 +6,17 @@ using System.Windows.Markup;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using NLog;
+using NLog.Config;
 using WpLogger.Wp8TestApp.Resources;
-using WpLogger.Wp8TestApp.ViewModels;
+using WpLogger.Wp8TestApp.Services;
+
 
 namespace WpLogger.Wp8TestApp
 {
     public partial class App : Application
     {
-        private static MainViewModel viewModel = null;
 
-        /// <summary>
-        /// A static ViewModel used by the views to bind against.
-        /// </summary>
-        /// <returns>The MainViewModel object.</returns>
-        public static MainViewModel ViewModel
-        {
-            get
-            {
-                // Delay creation of the view model until necessary
-                if (viewModel == null)
-                    viewModel = new MainViewModel();
-
-                return viewModel;
-            }
-        }
 
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
@@ -73,6 +60,18 @@ namespace WpLogger.Wp8TestApp
                 // and consume battery power when the user is not using the phone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+
+            // initialize logger
+
+            /*
+            var loggingConfig = new LoggingConfiguration();
+            var loggingTarget = new NLogWpLoggerTarget();
+            loggingConfig.AddTarget("wp_logger", loggingTarget);
+            LogManager.Configuration = loggingConfig;
+             */
+
+            ConfigurationItemFactory.Default.Targets.RegisterDefinition("wp_logger", typeof(NLogWpLoggerTarget));
+
         }
 
         // Code to execute when a contract activation such as a file open or save picker returns 
@@ -91,11 +90,7 @@ namespace WpLogger.Wp8TestApp
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            // Ensure that application state is restored appropriately
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+
         }
 
         // Code to execute when the application is deactivated (sent to background)

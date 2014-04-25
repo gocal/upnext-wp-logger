@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30324.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpLogger.Wp8TestApp", "WpLogger.Wp8TestApp\WpLogger.Wp8TestApp.csproj", "{E03DF464-2687-4C06-9813-96AE20835C75}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpLogger.DataContract", "..\WpLogger.DataContract\WpLogger.DataContract\WpLogger.DataContract.csproj", "{FADF7589-30C5-43F5-89FE-8ADF7E395E25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,14 @@ Global
 		{E03DF464-2687-4C06-9813-96AE20835C75}.Release|x86.ActiveCfg = Release|x86
 		{E03DF464-2687-4C06-9813-96AE20835C75}.Release|x86.Build.0 = Release|x86
 		{E03DF464-2687-4C06-9813-96AE20835C75}.Release|x86.Deploy.0 = Release|x86
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FADF7589-30C5-43F5-89FE-8ADF7E395E25}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
