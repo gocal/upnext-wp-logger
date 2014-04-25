@@ -8,6 +8,9 @@ namespace BackendWebSite.Models
 {
     public class LogRepository : ILogRepository
     {
+        private static readonly DateTime MinDate = new DateTime(2000, 1, 1);
+        private static readonly DateTime MaxDate = new DateTime(2100, 1, 1);
+
         public async Task SaveLogEntry(LogEntry logEntry)
         {
             var tableReference = this.GetTableReference();
@@ -28,10 +31,18 @@ namespace BackendWebSite.Models
 
             if (from != null)
             {
+                if (from < MinDate)
+                {
+                    from = MinDate;
+                }
                 queryString = TableQuery.CombineFilters(queryString, "and", TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.GreaterThanOrEqual, from.Value));
             }
             if (to != null)
             {
+                if (to > MaxDate)
+                {
+                    to = MaxDate;
+                }
                 queryString = TableQuery.CombineFilters(queryString, "and", TableQuery.GenerateFilterConditionForDate("TimeStamp", QueryComparisons.LessThanOrEqual, to.Value));
             }
 
