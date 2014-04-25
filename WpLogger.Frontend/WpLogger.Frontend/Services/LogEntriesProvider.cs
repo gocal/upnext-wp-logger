@@ -23,6 +23,10 @@ namespace WpLogger.Frontend.Services
 
         private DateTime _lastDate;
 
+        private object _lock = new object();
+
+        private bool _isRefreshInProgress;
+
         #endregion
 
         #region Constructors and Destructors
@@ -58,6 +62,25 @@ namespace WpLogger.Frontend.Services
 
         public ObservableCollection<LogEntry> LogEntries { get; set; }
 
+        public bool IsRefreshInProgress
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _isRefreshInProgress;
+                }
+            }
+
+            set
+            {
+                lock (_lock)
+                {
+                    _isRefreshInProgress = value;
+                }
+            }
+        }
+
         #endregion
 
         #region Public Methods and Operators
@@ -78,6 +101,11 @@ namespace WpLogger.Frontend.Services
 
         private async void TimerOnTick(object sender, EventArgs eventArgs)
         {
+            if (IsRefreshInProgress)
+            {
+                return;
+            }
+            IsRefreshInProgress = true;
             var toDate = DateTime.UtcNow;
             var newItems = await _loggerService.GetLogs(_lastDate, toDate);
 
@@ -97,6 +125,7 @@ namespace WpLogger.Frontend.Services
 
 
             _lastDate = LogEntries.Last().TimeStamp;
+            IsRefreshInProgress = false;
         }
 
 
