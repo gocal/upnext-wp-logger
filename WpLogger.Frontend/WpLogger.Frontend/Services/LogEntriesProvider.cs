@@ -26,16 +26,16 @@ namespace WpLogger.Frontend.Services
 
         #region Constructors and Destructors
 
-        public LogEntriesProvider()
+        public LogEntriesProvider(WpLoggerService loggerService)
         {
             LogEntries = new ObservableCollection<LogEntry>();
 
-            _loggerService = new WpLoggerService();
+            _loggerService = loggerService;
             _timer = new DispatcherTimer();
 
             _lastDate = DateTime.Now.AddHours(-1);
 
-            _timer.Interval = new TimeSpan(0, 0, 0, 1);
+            _timer.Interval = new TimeSpan(0, 0, 0, 0, 200);
             _timer.Tick += TimerOnTick;
         }
 
@@ -80,79 +80,28 @@ namespace WpLogger.Frontend.Services
             var toDate = DateTime.Now;
             var newItems = await _loggerService.GetLogs(_lastDate, toDate);
 
-            /*
+            LogEntries.Clear();
 
-            var xmlSerializer = new XmlSerializer(typeof(TestObject));
-
-            var testEntry = new TestObject()
+            if (newItems != null)
             {
-                text = "Entry " + DateTime.Now.Ticks,
-                value = (int) (DateTime.Now.Ticks/2)
-            };
+                foreach (var item in newItems)
+                {
+                    LogEntries.Add(item);
+                }
 
-            var content = "";
-
-            using (var stringWriter = new Utf8StringWriter(CultureInfo.InvariantCulture))
-            {
-                xmlSerializer.Serialize(stringWriter, testEntry);
-                content = stringWriter.ToString();
+                if (NewDataAvaliableEvent != null)
+                {
+                    NewDataAvaliableEvent(newItems, _lastDate, toDate);
+                }   
             }
 
-            var newItems = new List<LogEntry>();
-
-            newItems.Add(new LogEntry()
-            {
-                Content = content,
-                LogLevel = "Debug",
-                Tag = "Tag",
-                TimeStamp = DateTime.Now
-            });
-
-            */
-
-            foreach (var item in newItems)
-            {
-                LogEntries.Add(item);
-            }
-        
-            if (NewDataAvaliableEvent != null)
-            {
-                NewDataAvaliableEvent(newItems, _lastDate, toDate);
-            }
+  
 
             _lastDate = toDate;
         }
 
-        public class TestObject
-        {
-            public int value;
-            public string text;
-        }
 
-
-        public class Utf8StringWriter : StringWriter
-        {
-            #region Constructors and Destructors
-
-            public Utf8StringWriter(IFormatProvider formatProvider)
-                : base(formatProvider)
-            {
-            }
-
-            #endregion
-
-            #region Public Properties
-
-            public override Encoding Encoding
-            {
-                get
-                {
-                    return Encoding.UTF8;
-                }
-            }
-
-            #endregion
-        }
+    
 
         #endregion
     }

@@ -13,10 +13,10 @@ namespace WpLogger.DataContract.Services
     {
         #region Fields
 
-        private readonly string _apiUrl;
+        public readonly string _apiUrl;
         private readonly HttpClient httpClient;
-        private readonly string _appId;
-        private readonly string _deviceId;
+        private string _appId;
+        private string _deviceId;
 
         #endregion
 
@@ -29,6 +29,12 @@ namespace WpLogger.DataContract.Services
             _deviceId = "device_id_1";
 
             httpClient = new HttpClient();
+        }
+
+        public void setApp(string appId, string deviceId)
+        {
+            _appId = appId;
+            _deviceId = deviceId;
         }
 
         #endregion
@@ -67,10 +73,10 @@ namespace WpLogger.DataContract.Services
             var response = await Post(url, data);
         }
 
-        public async Task<List<LogEntry>> GetLogs(DateTime from, DateTime to)
+        public async Task<List<LogEntry>> GetLogs(DateTimeOffset from, DateTimeOffset to)
         {
 
-            var url = new Uri(_apiUrl +"device/" + _deviceId + "/app/" + _appId+"/log");
+            var url = new Uri(_apiUrl +"device/" + _deviceId + "/app/" + _appId+"/log?from"+from+"&to"+to);
      
             var response = await Get(url);
 
@@ -79,6 +85,37 @@ namespace WpLogger.DataContract.Services
 
 
             var list = JsonConvert.DeserializeObject<List<LogEntry>>(stringContent, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+            return list;
+        }
+
+
+        public async Task<List<String>> GetApps(string deviceId)
+        {
+            var url = new Uri(_apiUrl + "device/" + deviceId + "/app/");
+
+            var response = await Get(url);
+
+            var reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            var stringContent = reader.ReadToEnd();
+
+            var list = JsonConvert.DeserializeObject<List<String>>(stringContent, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+            return list;
+        }
+
+        public async Task<List<String>> GetDevices()
+        {
+
+            var url = new Uri(_apiUrl + "device/");
+
+            var response = await Get(url);
+
+            var reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            var stringContent = reader.ReadToEnd();
+
+
+            var list = JsonConvert.DeserializeObject<List<String>>(stringContent, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
 
             return list;
         }
