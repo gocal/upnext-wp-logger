@@ -23,20 +23,76 @@
 
         <StackPanel Grid.Row="0">
             <TextBlock Text="WpLogger" FontSize="30" />
-
         </StackPanel>
 
 
         <Grid Grid.Row="1">
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
 
 
-            <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+            <Grid Grid.Column="0">
+
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Devices"/>
+
+                    <ListBox Grid.Row="1" x:Name="Devices"  SelectionMode="Single" SelectionChanged="Devices_OnSelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+
+
+       
+            </Grid>
+
+
+            <Grid Grid.Column="1">
+
+                <Grid >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Apps" Grid.Row="0"/>
+
+                    <ListBox Grid.Row="1" x:Name="Apps"  SelectionMode="Single" SelectionChanged="Apps_OnSelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+
+
+  
+            </Grid>
+
+            <ScrollViewer  x:Name="DataGridScroll" Grid.Column="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" >
           
                 <sdk:DataGrid  x:Name="DataGrid" SelectionChanged="DataGrid_OnSelectionChanged"  SelectionMode="Single" RowHeight="20" CanUserResizeColumns="True">
                 </sdk:DataGrid>
@@ -45,13 +101,26 @@
             
 
             
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="3">
 
-                <ScrollViewer Margin="0,15,0,0" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
-                    <syntaxHighlighting:SyntaxHighlightingTextBox x:Name="CodeHighlighter" 
+                <Grid >
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="Details"/>
+
+                    <ScrollViewer Grid.Row="1" Margin="0,15,0,0" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+                        <syntaxHighlighting:SyntaxHighlightingTextBox x:Name="CodeHighlighter" 
 										FontFamily="Consolas, Courier New"
 										SourceLanguage="Xml" />
-                </ScrollViewer>
+                    </ScrollViewer>
+
+                </Grid>
+                
+           
 
 
             </Grid>

@@ -21,8 +21,9 @@
             
             <Button Content="Send entry" Click="ButtonBase_OnClick"/>
             <TextBox  TextWrapping="Wrap" x:Name="TextBox" Text="Log text"/>
-            
-            
+
+            <Button Content="Send Xml" Click="ButtonBase_OnClick2"/>
+
         </StackPanel>
         
     </Grid>

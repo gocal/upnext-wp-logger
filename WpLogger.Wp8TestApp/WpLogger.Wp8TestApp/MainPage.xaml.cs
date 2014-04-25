@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using System.Xml.Serialization;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using NLog;
@@ -53,5 +57,67 @@ namespace WpLogger.Wp8TestApp
         {
             _logger.Debug(TextBox.Text);
         }
+
+        private void ButtonBase_OnClick2(object sender, RoutedEventArgs e)
+        {
+            var xmlSerializer = new XmlSerializer(typeof(List<TestObject>));
+
+            var list = new List<TestObject>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                var testEntry = new TestObject()
+                {
+                    text = "Entry " + i,
+                    value = i
+                };
+
+                list.Add(testEntry);
+   
+            }
+
+            var content = "";
+
+            using (var stringWriter = new Utf8StringWriter(CultureInfo.InvariantCulture))
+            {
+                xmlSerializer.Serialize(stringWriter, list);
+                content = stringWriter.ToString();
+            }
+
+            _logger.Debug(content);
+
+        }
+
+        public class Utf8StringWriter : StringWriter
+        {
+            #region Constructors and Destructors
+
+            public Utf8StringWriter(IFormatProvider formatProvider)
+                : base(formatProvider)
+            {
+            }
+
+            #endregion
+
+            #region Public Properties
+
+            public override Encoding Encoding
+            {
+                get
+                {
+                    return Encoding.UTF8;
+                }
+            }
+
+            #endregion
+        }
+
+        public class TestObject
+        {
+            public int value;
+            public string text;
+        }
+
+
     }
 }
