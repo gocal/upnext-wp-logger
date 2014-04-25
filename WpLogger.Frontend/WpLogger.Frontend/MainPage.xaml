@@ -1,0 +1,74 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:syntaxHighlighting="clr-namespace:SharpGIS.SyntaxHighlighting;assembly=SharpGIS.SyntaxHighlighting"
+    x:Class="WpLogger.Frontend.MainPage"
+
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="700">
+
+    
+    
+    <Grid x:Name="LayoutRoot" Background="White">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="WpLogger" FontSize="30" />
+
+        </StackPanel>
+
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Grid.Column="0">
+
+            </ListBox>
+
+            <ListBox Grid.Column="1">
+
+            </ListBox>
+
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+
+                <sdk:DataGrid  x:Name="DataGrid" >
+                </sdk:DataGrid>
+
+            </ScrollViewer>
+            
+
+            
+            <Grid Grid.Column="3">
+
+                <ScrollViewer Margin="0,15,0,0" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
+                    <syntaxHighlighting:SyntaxHighlightingTextBox x:Name="Highlighter" 
+										FontFamily="Consolas, Courier New"
+										SourceLanguage="Xml" />
+                </ScrollViewer>
+
+
+            </Grid>
+
+        </Grid>
+
+
+
+
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C3CFF3CD-AB73-4BB5-A45B-F93FB16DFB2A}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharpGIS.SyntaxHighlighting</RootNamespace>
+    <AssemblyName>SharpGIS.SyntaxHighlighting</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <TargetFrameworkProfile />
+    <SignManifests>false</SignManifests>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CodeColorizer.cs" />
+    <Compile Include="Common\ExtensionMethods.cs" />
+    <Compile Include="Common\Guard.cs" />
+    <Compile Include="Common\ILanguageRepository.cs" />
+    <Compile Include="Common\LanguageId.cs" />
+    <Compile Include="Common\LanguageRepository.cs" />
+    <Compile Include="Common\ScopeName.cs" />
+    <Compile Include="Compilation\CompiledLanguage.cs" />
+    <Compile Include="Compilation\ILanguageCompiler.cs" />
+    <Compile Include="Compilation\LanguageCompiler.cs" />
+    <Compile Include="Compilation\Languages\Cpp.cs" />
+    <Compile Include="Compilation\Languages\CSharp.cs" />
+    <Compile Include="Compilation\Languages\JavaScript.cs" />
+    <Compile Include="Compilation\Languages\VbDotNet.cs" />
+    <Compile Include="Compilation\Languages\Xml.cs" />
+    <Compile Include="Formatters.cs" />
+    <Compile Include="Formatting\TextInsertion.cs" />
+    <Compile Include="Formatting\XamlFormatter.cs" />
+    <Compile Include="Formatting\XamlInlineFormatter.cs" />
+    <Compile Include="ICodeColorizer.cs" />
+    <Compile Include="IFormatter.cs" />
+    <Compile Include="ILanguage.cs" />
+    <Compile Include="IStyleSheet.cs" />
+    <Compile Include="LanguageRule.cs" />
+    <Compile Include="Languages.cs" />
+    <Compile Include="Parsing\ILanguageParser.cs" />
+    <Compile Include="Parsing\LanguageParser.cs" />
+    <Compile Include="Parsing\Scope.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SourceLanguageType.cs" />
+    <Compile Include="Style.cs" />
+    <Compile Include="StyleDictionary.cs" />
+    <Compile Include="StyleSheets.cs" />
+    <Compile Include="Styling\StyleSheets\DefaultStyleSheet.cs" />
+    <Compile Include="SyntaxHighlightingTextBox.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

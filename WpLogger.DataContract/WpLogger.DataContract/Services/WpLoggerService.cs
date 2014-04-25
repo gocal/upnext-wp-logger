@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WpLogger.DataContract.Model;
 
-namespace WpLogger.Wp8TestApp.Services
+namespace WpLogger.DataContract.Services
 {
     public class WpLoggerService
     {
@@ -23,8 +25,8 @@ namespace WpLogger.Wp8TestApp.Services
         public WpLoggerService()
         {
             _apiUrl = "http://upnext-hackathon.azurewebsites.net/api/";
-            _appId = "1";
-            _deviceId = "1";
+            _appId = "app_id_1";
+            _deviceId = "device_id_1";
 
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("Accept", "application/xml");
@@ -34,7 +36,7 @@ namespace WpLogger.Wp8TestApp.Services
 
         #region Public Methods and Operators
 
-        public async Task<HttpResponseMessage> Post(Uri address, string data)
+        private async Task<HttpResponseMessage> Post(Uri address, string data)
         {
 
             {
@@ -44,6 +46,11 @@ namespace WpLogger.Wp8TestApp.Services
                     return await httpClient.SendAsync(request);
                 }
             }
+        }
+
+        public async Task<HttpResponseMessage> Get(Uri address)
+        {
+            return await httpClient.GetAsync(address);
         }
 
         public async void SendLog(string tag, string content)
@@ -58,6 +65,22 @@ namespace WpLogger.Wp8TestApp.Services
             var url = new Uri(_apiUrl + _deviceId + "/" + _appId);
             var data = JsonConvert.SerializeObject(logEntry);
             var response = await Post(url, data);
+        }
+
+        public async Task<List<LogEntry>> GetLogs(DateTime from, DateTime to)
+        {
+
+            var url = new Uri(_apiUrl + _deviceId + "/" + _appId);
+     
+            var response = await Get(url);
+
+            var reader = new StreamReader(await response.Content.ReadAsStreamAsync());
+            var stringContent = reader.ReadToEnd();
+
+
+            var list = JsonConvert.DeserializeObject<List<LogEntry>>(stringContent, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+
+            return list;
         }
 
         #endregion

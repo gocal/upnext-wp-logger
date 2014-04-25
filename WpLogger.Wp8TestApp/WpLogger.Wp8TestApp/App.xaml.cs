@@ -63,14 +63,16 @@ namespace WpLogger.Wp8TestApp
 
             // initialize logger
 
-            /*
+            
             var loggingConfig = new LoggingConfiguration();
             var loggingTarget = new NLogWpLoggerTarget();
             loggingConfig.AddTarget("wp_logger", loggingTarget);
+            var storageRule = new LoggingRule("*", LogLevel.Trace, loggingTarget);
+            loggingConfig.LoggingRules.Add(storageRule);
             LogManager.Configuration = loggingConfig;
-             */
+            
 
-            ConfigurationItemFactory.Default.Targets.RegisterDefinition("wp_logger", typeof(NLogWpLoggerTarget));
+            //ConfigurationItemFactory.Default.Targets.RegisterDefinition("wp_logger", typeof(NLogWpLoggerTarget));
 
         }
 
