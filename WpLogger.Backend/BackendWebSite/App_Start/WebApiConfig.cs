@@ -33,12 +33,6 @@ namespace BackendWebSite
                 defaults: new { controller = "apps" }
             );
 
-            /*config.Routes.MapHttpRoute(
-                name: "Log",
-                routeTemplate: "api/device/{deviceId}/app/{appId}/log",
-                defaults: new { controller = "logs" }
-            );*/
-
             config.Routes.MapHttpRoute(
                 name: "LogWithDates",
                 routeTemplate: "api/device/{deviceId}/app/{appId}/log/{from}/{to}",
